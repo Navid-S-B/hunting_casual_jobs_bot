@@ -4,8 +4,7 @@
 """
 This script scrapes job listing websites of my choice with companies
 that I want to seek casual employment, and sends an email
-which generates reports for open job opportunities that I will 
-be interested in in my local area.
+which generates reports for open job opportunities in my local area.
 
 This was integrated into a Rasperry Pi.
 """
