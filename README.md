@@ -1,4 +1,4 @@
-# Finding Casual Jobs Bot
+# Hunting Casual Jobs Bot
 This is a project I had made for fun to reduce job hunting times and recieving 
 information on opportunities at companies I want to work for. This is intended
 to run on a dedicated computer so I can search other job sites
