@@ -22,7 +22,7 @@ when the python script executes.
 
 ## How to use it?
 The bot is activated through executing the shell script.
-### `./job_searching_bot.sh`
+#### `./job_searching_bot.sh`
 
 ## Error handling
 The python script prints the error the STDOUT, and notifies the user via email
