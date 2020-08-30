@@ -10,7 +10,7 @@ do
     # Error detection measures;
     # the python script will produce an error or success message
     # and log it.
-    echo "$output | $date\n" >> job_report_generator_log.txt
+    echo "$output | $date\n" >> debug_log.txt
     if test "$output" = "Reports Sent"
     then
         rm *report.txt
