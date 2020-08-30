@@ -145,7 +145,8 @@ def main():
     goodguys()
 
     # List of reports to iterate
-    file_list = ["woolworths_jobs_report.txt", "jb_jobs_report.txt", "officeworks_jobs_report.txt", "coles_jobs_report.txt", "goodguys_jobs_report.txt"]
+    file_list = ["woolworths_jobs_report.txt", "jb_jobs_report.txt", "officeworks_jobs_report.txt", 
+                "coles_jobs_report.txt", "goodguys_jobs_report.txt"]
 
     # EMAIL PROTOCOL
     sender_addr = ""
