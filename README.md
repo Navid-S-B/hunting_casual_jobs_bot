@@ -17,7 +17,7 @@ when the python script executes.
 
 This was integrated into a Raspberry Pi as a dedicated 'server'.
 
-# Requied fixes
+# Required fixes
     - Needs better commenting.
     - Needs try/except error handling when the url's might expire
       or the html structure has changed.
