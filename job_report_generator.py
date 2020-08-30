@@ -6,10 +6,13 @@ This script scrapes job listing websites of my choice with companies
 that I want to seek casual employment, and sends an email
 which generates reports for open job opportunities in my local area.
 
+If any errors occur with the report generating functions, then this script
+will send an email notification with the error message attached.
+
 This in combination with a bash shell script will become a job searching
 bot.
 
-This was integrated into a Raspberry Pi for continual searching.
+This was integrated into a Raspberry Pi.
 """
 
 # Scraping libaries
@@ -113,6 +116,7 @@ def coles():
 
     return 0
 
+# Create job file for goodguys' jobs. It lists all jobs, their types and their deadliies.
 def goodguys():
 
     # Scrape website using html indent and tags specific to this website
@@ -137,51 +141,81 @@ def goodguys():
 # Creates reports and attaches them to an email to notify me about jobs
 def main():
 
-    # List of functions which produce reports per website
-    woolworths()
-    jb()
-    officeworks()
-    coles()
-    goodguys()
-
-    # List of reports to iterate
-    file_list = ["woolworths_jobs_report.txt", "jb_jobs_report.txt", "officeworks_jobs_report.txt", 
-                "coles_jobs_report.txt", "goodguys_jobs_report.txt"]
-
-    # EMAIL PROTOCOL
+    # Email Login and Reciever Information
     sender_addr = ""
     password = ""
     reciever_addr = sender_addr
-    
-    # Email message
-    msg = MIMEMultipart()
-    msg['From'] = sender_addr
-    msg['To'] = reciever_addr
-    msg['Subject'] = "Current Job Listings"
-    body = "Generated job reports on {}".format(datetime.now())
-    msg.attach(MIMEText(body, 'plain')) 
 
-    # Attaching reports
-    for report in file_list:
+    # Generate reports
+    try:
+        # List of functions which produce reports per website
+        woolworths()
+        jb()
+        officeworks()
+        coles()
+        goodguys()
 
-        # Open file
-        attachment = open(report, "rb")
-        # Encoding files for email notification
-        p = MIMEBase('application', 'octet-stream') 
-        p.set_payload((attachment).read()) 
-        encoders.encode_base64(p) 
-        p.add_header('Content-Disposition', "attachment; filename= %s" % report) 
-        msg.attach(p)
-        # Close file
-        attachment.close()
+    # If web scraping functions fail
+    except Exception as e:
 
-    # Create SMTP session 
-    s = smtplib.SMTP('smtp-mail.outlook.com', 587) 
-    s.starttls() 
-    s.login(sender_addr, password) 
-    text = msg.as_string() 
-    s.sendmail(sender_addr, reciever_addr, text) 
-    s.quit()
-    
+        # Create error message
+        msg = MIMEMultipart()
+        msg['From'] = sender_addr
+        msg['To'] = reciever_addr
+        msg['Subject'] = "Program Error"
+        body = "Generated error notification on {}.\nThe following error was produced:\n{}".format(datetime.now(), e)
+        msg.attach(MIMEText(body, 'plain')) 
+
+        # Output error to be logged
+        print(e)
+
+    # Successful execution of report generating function
+    else:
+        # List of reports to iterate
+        file_list = ["woolworths_jobs_report.txt", "jb_jobs_report.txt", "officeworks_jobs_report.txt", 
+                    "coles_jobs_report.txt", "goodguys_jobs_report.txt"]
+        
+        # Email success message
+        msg = MIMEMultipart()
+        msg['From'] = sender_addr
+        msg['To'] = reciever_addr
+        msg['Subject'] = "Current Job Listings"
+        body = "Generated job reports on {}".format(datetime.now())
+        msg.attach(MIMEText(body, 'plain')) 
+
+        # Attaching reports
+        for report in file_list:
+
+            # Open file
+            attachment = open(report, "rb")
+            # Encoding files for email notification
+            p = MIMEBase('application', 'octet-stream') 
+            p.set_payload((attachment).read()) 
+            encoders.encode_base64(p) 
+            p.add_header('Content-Disposition', "attachment; filename= %s" % report) 
+            msg.attach(p)
+            # Close file
+            attachment.close()
+
+        # Signal shell script for instance of success
+        print("Reports Sent")
+
+    # Send email with reports attached
+    try:    
+        # Create SMTP session to send email
+        s = smtplib.SMTP('smtp-mail.outlook.com', 587) 
+        s.starttls() 
+        s.login(sender_addr, password) 
+        text = msg.as_string() 
+        s.sendmail(sender_addr, reciever_addr, text) 
+        s.quit()
+    # Print email sending error to be logged by shell script
+    # (Cannot think of error notifying measure under this circumstance)
+    except Exception as e:
+        print(e)
+
+    return 0
+
+
 if __name__ == "__main__":
     main()
