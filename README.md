@@ -5,7 +5,7 @@ information on opportunities at companies I want to work for.
 ## How does it work?
 The bot utilises python to scrape webpages of job listings and then
 a shell script to execute every 2 days to send an email attached with
-reports.
+textfile reports.
 
 The python script then sends an email with text file reports with summarised 
 information, depending on the type of job post that a company uses (scraping 
