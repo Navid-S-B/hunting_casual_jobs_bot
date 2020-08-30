@@ -5,6 +5,8 @@
 This script scrapes job listing websites of my choice with companies
 that I want to seek casual employment, and sends an email
 which generates reports for open job opportunities in my local area.
+It generates reports on the latest job postings on the first page
+of a job listing website (adjust links to your local area).
 
 If any errors occur with the report generating functions, then this script
 will send an email notification with the error message attached.
@@ -30,7 +32,7 @@ from email import encoders
 def woolworths():
     
     # Scrape website using html indent and tags specific to this website
-    url = "https://www.wowcareers.com.au/jobs/listing?query=&refine_requisition_number=&brand=&state=ACT&country=Australia&refine_posted_within=&expertise=&worktype=&postcode=&location_within=&role="
+    url = "https://www.wowcareers.com.au/jobs/listing?query=&expertise=&postcode=&location_within=&refine_requisition_number=&refine_posted_within=&state=&country=&worktype=&brand=&role="
     response = requests.get(url)
     soup = BeautifulSoup(response.text,'html.parser')
     find_jobs = soup.find_all('h3', class_ = 'jobs__listing-item-title')
@@ -50,7 +52,7 @@ def woolworths():
 def jb():
 
     # Scrape website using html indent and tags specific to this website
-    url = "https://careers.jbhifi.com.au/en/filter/?search-keyword=&location=act%20-%20metro&job-mail-subscribe-privacy=agree"
+    url = "https://careers.jbhifi.com.au/en/listing/"
     response = requests.get(url)
     soup = BeautifulSoup(response.text,'html.parser')
     # This website produces double reads, so I specified rhe body tag to search
@@ -71,7 +73,7 @@ def jb():
 def officeworks():
 
     # Scrape website using html indent and tags specific to this website
-    url = "https://mycareer.officeworks.com.au/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield2=&optionsFacetsDD_customfield4=&optionsFacetsDD_customfield3=Australian+Capital+Territory"
+    url = "https://mycareer.officeworks.com.au/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_customfield1=&optionsFacetsDD_customfield2=&optionsFacetsDD_customfield4=&optionsFacetsDD_customfield3="
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     find_body = soup.find('tbody')
@@ -99,7 +101,7 @@ def officeworks():
 def coles():
 
     # Scrape website using html indent and tags specific to this website
-    url = "https://search.colescareers.com.au/cw/en/filter/?search-keyword=&location=act%20-%20metro"
+    url = "https://search.colescareers.com.au/cw/en/listing/"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     find_body = soup.find('tbody', id = "search-results-content")
@@ -120,7 +122,7 @@ def coles():
 def goodguys():
 
     # Scrape website using html indent and tags specific to this website
-    url = "https://careers.thegoodguys.com.au/en/filter/?search-keyword=&location=act%20-%20metro&job-mail-subscribe-privacy=agree"
+    url = "https://careers.thegoodguys.com.au/en/filter/?search-keyword=&work-type=casual&job-mail-subscribe-privacy=agree"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     find_body = soup.find('ul', id = "search-results-content")
@@ -215,7 +217,6 @@ def main():
         print(e)
 
     return 0
-
 
 if __name__ == "__main__":
     main()
