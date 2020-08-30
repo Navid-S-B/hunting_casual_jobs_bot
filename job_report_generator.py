@@ -162,8 +162,8 @@ def main():
         msg = MIMEMultipart()
         msg['From'] = sender_addr
         msg['To'] = reciever_addr
-        msg['Subject'] = "Program Error"
-        body = "Generated error notification on {}.\nThe following error was produced:\n{}".format(datetime.now(), e)
+        msg['Subject'] = "Current Job Listings: Error Occured"
+        body = "Program failed on {}.\n\nThe following error was produced:\n{}\n\n The bot has been disabled.".format(datetime.now(), e)
         msg.attach(MIMEText(body, 'plain')) 
 
         # Output error to be logged
