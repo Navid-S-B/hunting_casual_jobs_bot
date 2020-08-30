@@ -3,7 +3,7 @@
 # Keep bot active to scan every 3 days
 while true
 do
-    python3 job_notifier.py
+    python3 job_report_generator.py
     rm *report.txt
     # Activate every 2 days
     date="`date`"
