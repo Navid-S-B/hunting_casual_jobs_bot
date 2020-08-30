@@ -148,8 +148,8 @@ def main():
     file_list = ["woolworths_jobs_report.txt", "jb_jobs_report.txt", "officeworks_jobs_report.txt", "coles_jobs_report.txt", "goodguys_jobs_report.txt"]
 
     # EMAIL PROTOCOL
-    sender_addr = ""
-    password = ""
+    sender_addr = "navid.bhuiyan45@outlook.com.au"
+    password = "EMAILykull@$2324"
     reciever_addr = sender_addr
     
     # Email message

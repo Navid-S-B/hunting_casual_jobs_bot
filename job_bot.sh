@@ -5,5 +5,6 @@ while true
 do
     python3 job_notifier.py
     rm *report.txt
-    sleep 10s
+    # Activate every 3 days
+    sleep 3d
 done
