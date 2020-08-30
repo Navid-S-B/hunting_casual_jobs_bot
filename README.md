@@ -33,4 +33,3 @@ bot execution will be halted.
 ## Required fixes/additional requirements
     - Add a better system of adding website and file report arguments.
     - Add a remote error notification measure when STMP server error has occured.
-    - Add a packages file.
