@@ -1,2 +1,2 @@
-# Ignore debug log
+# Ignore debug_log.txt (debugging file)
 debug_log.txt
