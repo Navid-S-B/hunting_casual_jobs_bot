@@ -22,3 +22,4 @@ This was integrated into a Raspberry Pi as a dedicated 'server'.
     - Needs try/except error handling when the url's might expire
       or the html structure has changed.
     - Add a better system of adding website and file report arguments.
+    - Add a packages file.
