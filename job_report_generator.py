@@ -46,8 +46,6 @@ def woolworths():
         job_file.write("{} | Type: {} | Posted: {}\n".format(find_jobs[i].a.text, find_job_type[i].text, find_dates[i].text))
     job_file.close()
 
-    return 0
-
 # Create job file for JB jobs. It lists all jobs and their deadliies.
 def jb():
 
@@ -66,8 +64,6 @@ def jb():
     for i in range(len(find_jobs)):
         job_file.write("{} | Due: {}\n".format(find_jobs[i].text, find_dates[i].text))
     job_file.close()
-
-    return 0
 
 # Create job file for officworks jobs. It lists all jobs and their posting times.
 def officeworks():
@@ -95,8 +91,6 @@ def officeworks():
 
     job_file.close()
 
-    return 0
-
 # Create job file for coles jobs. It lists all jobs and their deadliies.
 def coles():
 
@@ -116,8 +110,6 @@ def coles():
         job_file.write("{} | Type: {} | Due: {}\n".format(find_jobs[i].text, find_jobs_type[i].text, find_dates[i].text))
     job_file.close()
 
-    return 0
-
 # Create job file for goodguys' jobs. It lists all jobs, their types and their deadliies.
 def goodguys():
 
@@ -135,10 +127,7 @@ def goodguys():
     job_file.write("{}\n\n".format(url))
     for i in range(len(find_jobs)):
         job_file.write("{} | Location: {} | Due: {}\n".format(find_jobs[i].text, find_locations[i].text, find_dates[i].text))
-    job_file.close()
-
-    return 0
-    
+    job_file.close() 
 
 # Creates reports and attaches them to an email to notify me about jobs
 def main():
@@ -215,8 +204,6 @@ def main():
     # (Cannot think of error notifying measure under this circumstance)
     except Exception as e:
         print(e)
-
-    return 0
 
 if __name__ == "__main__":
     main()
